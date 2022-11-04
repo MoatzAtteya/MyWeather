@@ -100,4 +100,10 @@ class TodayWeatherViewModel @Inject constructor(
         return weatherType
     }
 
+    fun giveDate(): String? {
+        val cal: Calendar = Calendar.getInstance()
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        return sdf.format(cal.time)
+    }
+
 }

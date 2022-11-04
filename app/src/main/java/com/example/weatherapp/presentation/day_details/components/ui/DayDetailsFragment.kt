@@ -22,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class DayDetailsFragment : Fragment() {
@@ -78,7 +79,7 @@ class DayDetailsFragment : Fragment() {
         setUpHourlyRecyclerView(weather.hourly)
 
         val temp = buildString {
-            append(weather.currentWeather.temperature.toInt())
+            append(weather.currentWeather.temperature.roundToInt())
             append(" \u2103")
         }
         binding.reelFeelTempValue.text = temp
@@ -145,8 +146,8 @@ class DayDetailsFragment : Fragment() {
         val adapter = HourlyWeatherAdapter(this, IntArray(24))
         adapter.setHourlyWeather(weather)
         binding.dayDetailHourlyWeatherRv.adapter = adapter
-        binding.dayDetailHourlyWeatherRv.smoothScrollToPosition(getCurrentWeatherIndex(weather))
-        adapter.notifyDataSetChanged()
+       // binding.dayDetailHourlyWeatherRv.smoothScrollToPosition(getCurrentWeatherIndex(weather))
+        //adapter.notifyDataSetChanged()
     }
 
     private fun getCurrentWeatherIndex(hourly: Hourly): Int {

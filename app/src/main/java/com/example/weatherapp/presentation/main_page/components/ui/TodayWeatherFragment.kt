@@ -24,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class TodayWeatherFragment : Fragment() {
@@ -38,14 +39,15 @@ class TodayWeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this)[TodayWeatherViewModel::class.java]
         binding = FragmentTodayWeatherBinding.inflate(inflater, container, false)
 
-        val lat: Float = 31.18F
-        val long: Float = 29.97F
+        val todayDate = viewModel.giveDate()
+
+
         viewModel.getWeather(
-            lat,
-            long,
+            31.18F,
+            29.97F,
             "Africa/Cairo",
-            "2022-11-02",
-            "2022-11-06"
+            todayDate!!,
+            "2022-11-09"
         )
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -80,7 +82,7 @@ class TodayWeatherFragment : Fragment() {
 
         //Appending Celsius mark to the temp.
         val temp = buildString {
-            append(weather.currentWeather.temperature.toInt())
+            append(weather.currentWeather.temperature.roundToInt())
             append(" \u2103")
         }
         binding.dayTempValueTv.text = temp

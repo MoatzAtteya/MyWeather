@@ -12,6 +12,7 @@ import com.example.weatherapp.domain.model.Daily
 import com.example.weatherapp.presentation.main_page.components.ui.TodayWeatherFragment
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 class DailyWeatherAdapter(val fragment: TodayWeatherFragment, val maxTemp: List<Double>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -35,11 +36,11 @@ class DailyWeatherAdapter(val fragment: TodayWeatherFragment, val maxTemp: List<
             val date = SimpleDateFormat("MMM, yyyy").format(df)
 
             val maxTemp = buildString {
-                append(weather.maxTemperatures[position].toInt())
+                append(weather.maxTemperatures[position].roundToInt())
                 append(" \u2103")
             }
             val minTemp = buildString {
-                append(weather.minTemperatures[position].toInt())
+                append(weather.minTemperatures[position].roundToInt())
                 append(" \u2103")
             }
             val windSpeed = weather.maxWindSpeed[position]

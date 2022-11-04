@@ -12,6 +12,7 @@ import com.example.weatherapp.common.Constants
 import com.example.weatherapp.databinding.HourlyWeatherItemBinding
 import com.example.weatherapp.domain.model.Hourly
 import java.util.*
+import kotlin.math.roundToInt
 
 class HourlyWeatherAdapter(val fragment: Fragment, val temp: IntArray) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -33,7 +34,7 @@ class HourlyWeatherAdapter(val fragment: Fragment, val temp: IntArray) :
 
             holder.binding.apply {
                 val temp = buildString {
-                    append(weather.temperature[position].toInt())
+                    append(weather.temperature[position].roundToInt())
                     append(" \u2103")
                 }
                 hourWeatherTempValue.text = temp
