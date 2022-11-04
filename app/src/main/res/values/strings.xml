@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="precipitation_detail">Precipitation Detail</string>
+    <string name="rain">Rain</string>
+    <string name="_10">10%</string>
+</resources>

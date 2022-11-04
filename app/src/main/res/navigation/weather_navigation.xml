@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weather_navigation"
+    app:startDestination="@id/todayWeatherFragment">
+
+
+    <fragment
+        android:id="@+id/todayWeatherFragment"
+        android:name="com.example.weatherapp.presentation.main_page.components.ui.TodayWeatherFragment"
+        android:label="fragment_today_weather"
+        tools:layout="@layout/fragment_today_weather" >
+        <action
+            android:id="@+id/action_todayWeatherFragment_to_dayDetailsFragment"
+            app:destination="@id/dayDetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/dayDetailsFragment"
+        android:name="com.example.weatherapp.presentation.day_details.components.ui.DayDetailsFragment"
+        android:label="fragment_day_details"
+        tools:layout="@layout/fragment_day_details" >
+        <argument
+            android:name="weather"
+            app:argType="com.example.weatherapp.domain.model.Weather" />
+    </fragment>
+</navigation>
