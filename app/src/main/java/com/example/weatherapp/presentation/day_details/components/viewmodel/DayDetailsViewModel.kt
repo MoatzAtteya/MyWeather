@@ -1,4 +1,4 @@
-package com.example.weatherapp.presentation.day_details.components.ui
+package com.example.weatherapp.presentation.day_details.components.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,6 @@ import com.example.weatherapp.common.Resource
 import com.example.weatherapp.domain.model.Daily
 import com.example.weatherapp.domain.model.Weather
 import com.example.weatherapp.domain.use_case.get_day_weather.GetDayWeatherUseCase
-import com.example.weatherapp.domain.use_case.get_hourly_weather.GetHourlyWeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

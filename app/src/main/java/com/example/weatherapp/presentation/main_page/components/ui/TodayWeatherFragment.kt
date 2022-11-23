@@ -1,5 +1,6 @@
 package com.example.weatherapp.presentation.main_page.components.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -17,6 +19,7 @@ import com.example.weatherapp.databinding.FragmentTodayWeatherBinding
 import com.example.weatherapp.domain.model.Daily
 import com.example.weatherapp.domain.model.Hourly
 import com.example.weatherapp.domain.model.Weather
+import com.example.weatherapp.presentation.main_page.components.SelectCountryBottomSheet
 import com.example.weatherapp.presentation.main_page.components.adapter.DailyWeatherAdapter
 import com.example.weatherapp.presentation.main_page.components.adapter.HourlyWeatherAdapter
 import com.example.weatherapp.presentation.main_page.components.viewmodel.TodayWeatherViewModel
@@ -25,6 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 @AndroidEntryPoint
 class TodayWeatherFragment : Fragment() {
@@ -39,22 +43,27 @@ class TodayWeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this)[TodayWeatherViewModel::class.java]
         binding = FragmentTodayWeatherBinding.inflate(inflater, container, false)
 
+        val sharedPreference =  requireContext().getSharedPreferences("Country-Zone",
+            Context.MODE_PRIVATE)
+        val city = sharedPreference.getString("City","Africa/Cairo")
+        val long = sharedPreference.getLong("Long" , 31.18.roundToLong())
+        val lat = sharedPreference.getLong("Lat" , 30.00.roundToLong())
+
         val todayDate = viewModel.giveDate()
-
-
+        val nextDayDate = viewModel.giveNextDayDate()
         viewModel.getWeather(
-            31.18F,
-            29.97F,
-            "Africa/Cairo",
+            long.toFloat(),
+            lat.toFloat(),
+            city!!,
             todayDate!!,
-            "2022-11-09"
+            nextDayDate
         )
 
         GlobalScope.launch(Dispatchers.Main) {
             viewModel.getWeatherResponse.collect { response ->
                 when (response) {
                     is Resource.Error -> {
-                        Log.e("getting weather data: ", response.message!!)
+                       Toast.makeText(requireContext(), response.message , Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
@@ -67,6 +76,14 @@ class TodayWeatherFragment : Fragment() {
 
         binding.viewFullDetailsTv.setOnClickListener {
             findNavController().navigate(R.id.action_todayWeatherFragment_to_dayDetailsFragment)
+        }
+
+        binding.locationTv.setOnClickListener {
+            val cityBottomSheet = SelectCountryBottomSheet()
+            cityBottomSheet.show(
+                requireActivity().supportFragmentManager,
+                "Select City"
+            )
         }
 
         return binding.root
@@ -161,6 +178,5 @@ class TodayWeatherFragment : Fragment() {
             }
         }
     }
-
 
 }

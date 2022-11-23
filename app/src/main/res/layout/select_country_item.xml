@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/card_secondary_background_color">
+
+    <TextView
+        android:id="@+id/city_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cairo"
+        android:fontFamily="@font/associate_sans"
+        android:textSize="@dimen/_15sdp"
+        android:textColor="@color/white"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/zone_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Africa"
+        android:fontFamily="@font/associate_sans"
+        android:textSize="@dimen/_13sdp"
+        android:textColor="@color/secondary_text_color"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/city_tv"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/secondary_text_color"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/zone_tv"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

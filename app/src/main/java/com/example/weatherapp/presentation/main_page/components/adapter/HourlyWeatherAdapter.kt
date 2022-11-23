@@ -123,7 +123,7 @@ class HourlyWeatherAdapter(val fragment: Fragment, val temp: IntArray) :
             }
             Constants.cloudy_sunny_key
         } else {
-            weatherType = if (currentTemp < 15)
+            weatherType = if (currentTemp < 10)
                 Constants.snow_key
             else if (currentHour in 6..18) {
                 Constants.sunny_key

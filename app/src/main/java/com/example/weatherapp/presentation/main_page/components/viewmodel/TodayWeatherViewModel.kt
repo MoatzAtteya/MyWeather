@@ -106,4 +106,11 @@ class TodayWeatherViewModel @Inject constructor(
         return sdf.format(cal.time)
     }
 
+    fun giveNextDayDate(): String {
+        val cal: Calendar = Calendar.getInstance()
+        cal.add(Calendar.DAY_OF_YEAR , 5)
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        return sdf.format(cal.time)
+    }
+
 }

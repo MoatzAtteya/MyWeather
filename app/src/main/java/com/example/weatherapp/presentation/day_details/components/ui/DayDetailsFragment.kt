@@ -1,5 +1,6 @@
 package com.example.weatherapp.presentation.day_details.components.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.example.weatherapp.databinding.FragmentDayDetailsBinding
 import com.example.weatherapp.domain.model.Daily
 import com.example.weatherapp.domain.model.Hourly
 import com.example.weatherapp.domain.model.Weather
+import com.example.weatherapp.presentation.day_details.components.viewmodel.DayDetailsViewModel
 import com.example.weatherapp.presentation.main_page.components.adapter.HourlyWeatherAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +25,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 @AndroidEntryPoint
 class DayDetailsFragment : Fragment() {
@@ -40,11 +43,17 @@ class DayDetailsFragment : Fragment() {
         viewModel = ViewModelProvider(this)[DayDetailsViewModel::class.java]
 
         val todayDate = viewModel.giveDate()
-        println("today date is:$todayDate")
+        val sharedPreference =  requireContext().getSharedPreferences("Country-Zone",
+            Context.MODE_PRIVATE)
+        val city = sharedPreference.getString("City","Africa/Cairo")
+        val long = sharedPreference.getLong("Long" , 31.18.roundToLong())
+        val lat = sharedPreference.getLong("Lat" , 30.00.roundToLong())
+
+
         viewModel.getWeather(
-            31.18F,
-            29.97F,
-            "Africa/Cairo",
+            long.toFloat(),
+            lat.toFloat(),
+            city!!,
             todayDate.toString(),
             todayDate.toString()
         )
