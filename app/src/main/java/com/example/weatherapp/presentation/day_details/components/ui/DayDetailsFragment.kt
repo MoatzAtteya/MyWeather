@@ -74,7 +74,7 @@ class DayDetailsFragment : Fragment() {
         }
 
 
-
+    jdsfjsdf jsdfjsdjf
         return binding.root
     }
 
