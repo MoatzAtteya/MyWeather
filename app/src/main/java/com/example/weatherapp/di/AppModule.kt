@@ -11,6 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import javax.inject.Singleton
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -27,6 +28,7 @@ object AppModule {
         return Retrofit.Builder()
             .baseUrl(Constants.base_url)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient.build())
             .build()
             .create(WeatherApi::class.java)

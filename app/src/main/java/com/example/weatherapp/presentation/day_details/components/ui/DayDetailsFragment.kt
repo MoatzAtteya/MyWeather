@@ -50,7 +50,7 @@ class DayDetailsFragment : Fragment() {
         val lat = sharedPreference.getLong("Lat" , 30.00.roundToLong())
 
 
-        viewModel.getWeather(
+        viewModel.getWeatherByRx(
             long.toFloat(),
             lat.toFloat(),
             city!!,

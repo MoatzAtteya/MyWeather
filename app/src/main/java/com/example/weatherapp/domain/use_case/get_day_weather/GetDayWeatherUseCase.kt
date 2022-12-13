@@ -5,6 +5,9 @@ import com.example.weatherapp.common.Resource
 import com.example.weatherapp.data.remote.dto.toWeather
 import com.example.weatherapp.domain.model.Weather
 import com.example.weatherapp.domain.repository.WeatherRepository
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -44,5 +47,31 @@ class GetDayWeatherUseCase @Inject constructor(
         }
     }
 
+    fun invoke2(
+        latitude: Float,
+        longitude: Float,
+        timezone: String,
+        start_date: String,
+        end_date: String
+    ): Observable<Weather> {
+        println("invoke2")
+        return repository.getHourlyWeatherObserver(
+                longitude,
+                latitude,
+                Constants.hourly,
+                Constants.daily,
+                timezone,
+                start_date,
+                end_date,
+                Constants.timeFormat
+            )
+                .map {
+                    it.toWeather()
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
+
+
+    }
 }
