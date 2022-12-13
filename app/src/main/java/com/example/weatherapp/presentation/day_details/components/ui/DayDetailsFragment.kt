@@ -74,7 +74,6 @@ class DayDetailsFragment : Fragment() {
         }
 
 
-        today is monday
 
         return binding.root
     }
