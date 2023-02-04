@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         println("first commit in debug branch")
-        println("Welcome in debug branch.")
+        println("Welcome")
     }
 
 
