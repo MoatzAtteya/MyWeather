@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         println("first commit in debug branch")
         println("Welcome")
+
+        print("bla bla bla")
     }
 
 
