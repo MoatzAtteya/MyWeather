@@ -12,8 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        today is a new day
     }
-    // trying to make new branch.
-    // change 1...
+
 }
